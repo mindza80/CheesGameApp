@@ -1,10 +1,10 @@
-﻿
+﻿@inject IJSRuntime JsRuntime
 
 
 
 <body>
     <table class="chess-board">
-            <tbody>
+            <tbody >
                 <tr>
                     <th></th>
                     <th>a</th>
@@ -18,94 +18,96 @@
                 </tr>
                 <tr>
                     <th>8</th>
-                    <td class="light">♜</td>
-                    <td class="dark">♞</td>
-                    <td class="light">♝</td>
-                    <td class="dark">♛</td>
-                    <td class="light">♚</td>
-                    <td class="dark">♝</td>
-                    <td class="light">♞</td>
-                    <td class="dark">♜</td>
+                    <td class="light" id="a8" @onclick=@(()=> cellPressed("a8"))>♜</td>
+                    <td class="dark" id="b8" @onclick=@(()=> cellPressed("b8"))>♞</td>
+                    <td class="light" id="c8" @onclick=@(()=> cellPressed("c8"))>♝</td>
+                    <td class="dark" id="d8" @onclick=@(()=> cellPressed("d8"))>♛</td>
+                    <td class="light" id="e8" @onclick=@(()=> cellPressed("e8"))>♚</td>
+                    <td class="dark" id="f8" @onclick=@(()=> cellPressed("f8"))>♝</td>
+                    <td class="light" id="g8" @onclick=@(()=> cellPressed("g8"))>♞</td>
+                    <td class="dark" id="h8" @onclick=@(()=> cellPressed("h8"))>♜</td>
                 </tr>
                 <tr>
                     <th>7</th>
-                    <td class="dark">♟</td>
-                    <td class="light">♟</td>
-                    <td class="dark">♟</td>
-                    <td class="light">♟</td>
-                    <td class="dark">♟</td>
-                    <td class="light">♟</td>
-                    <td class="dark">♟</td>
-                    <td class="light">♟</td>
+                    <td class="dark" id="a7" @onclick=@(()=> cellPressed("a7"))>♟</td>
+                    <td class="light" id="b7" @onclick=@(()=> cellPressed("b7"))>♟</td>
+                    <td class="dark" id="c7" @onclick=@(()=> cellPressed("c7"))>♟</td>
+                    <td class="light" id="d7" @onclick=@(()=> cellPressed("d7"))>♟</td>
+                    <td class="dark" id="e7" @onclick=@(()=> cellPressed("e7"))>♟</td>
+                    <td class="light" id="f7" @onclick=@(()=> cellPressed("f7"))>♟</td>
+                    <td class="dark" id="g7" @onclick=@(()=> cellPressed("g7"))>♟</td>
+                    <td class="light" id="h7" @onclick=@(()=> cellPressed("h7"))>♟</td>
                 </tr>
                 <tr>
                     <th>6</th>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
+                    <td class="light" id="a6" @onclick=@(()=> cellPressed("a6"))></td>
+                    <td class="dark" id="b6" @onclick=@(()=> cellPressed("b6"))></td>
+                    <td class="light" id="c6" @onclick=@(()=> cellPressed("c6"))></td>
+                    <td class="dark" id="d6" @onclick=@(()=> cellPressed("d6"))></td>
+                    <td class="light" id="e6" @onclick=@(()=> cellPressed("e6"))></td>
+                    <td class="dark" id="f6" @onclick=@(()=> cellPressed("f6"))></td>
+                    <td class="light" id="g6" @onclick=@(()=> cellPressed("g6"))></td>
+                    <td class="dark" id="h6" @onclick=@(()=> cellPressed("h6"))></td>
                 </tr>
                 <tr>
                     <th>5</th>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
+                    <td class="dark" id="a5" @onclick=@(()=> cellPressed("a5"))></td>
+                    <td class="light" id="b5" @onclick=@(()=> cellPressed("b5"))></td>
+                    <td class="dark" id="c5" @onclick=@(()=> cellPressed("c5"))></td>
+                    <td class="light" id="d5" @onclick=@(()=> cellPressed("d5"))></td>
+                    <td class="dark" id="e5" @onclick=@(()=> cellPressed("e5"))></td>
+                    <td class="light" id="f5" @onclick=@(()=> cellPressed("f5"))></td>
+                    <td class="dark" id="g5" @onclick=@(()=> cellPressed("g5"))></td>
+                    <td class="light" id="h5" @onclick=@(()=> cellPressed("h5"))></td>
                 </tr>
                 <tr>
                     <th>4</th>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
+                    <td class="light" id="a4" @onclick=@(()=> cellPressed("a4"))></td>
+                    <td class="dark" id="b4" @onclick=@(()=> cellPressed("b4"))></td>
+                    <td class="light" id="c4" @onclick=@(()=> cellPressed("c4"))></td>
+                    <td class="dark" id="d4" @onclick=@(()=> cellPressed("d4"))></td>
+                    <td class="light" id="e4" @onclick=@(()=> cellPressed("e4"))></td>
+                    <td class="dark" id="f4" @onclick=@(()=> cellPressed("f4"))></td>
+                    <td class="light" id="g4" @onclick=@(()=> cellPressed("g4"))></td>
+                    <td class="dark" id="h4" @onclick=@(()=> cellPressed("h4"))></td>
                 </tr>
                 <tr>
                     <th>3</th>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
-                    <td class="dark"></td>
-                    <td class="light"></td>
+                    <td class="dark" id="a3" @onclick=@(()=> cellPressed("a3"))></td>
+                    <td class="light" id="b3" @onclick=@(()=> cellPressed("b3"))></td>
+                    <td class="dark" id="c3" @onclick=@(()=> cellPressed("c3"))></td>
+                    <td class="light" id="d3" @onclick=@(()=> cellPressed("d3"))></td>
+                    <td class="dark" id="e3" @onclick=@(()=> cellPressed("e3"))></td>
+                    <td class="light" id="f3" @onclick=@(()=> cellPressed("f3"))></td>
+                    <td class="dark" id="g3" @onclick=@(()=> cellPressed("g3"))></td>
+                    <td class="light" id="h3" @onclick=@(()=> cellPressed("h3"))></td>
                 </tr>
                 <tr>
                     <th>2</th>
-                    <td class="light">♙</td>
-                    <td class="dark">♙</td>
-                    <td class="light">♙</td>
-                    <td class="dark">♙</td>
-                    <td class="light">♙</td>
-                    <td class="dark">♙</td>
-                    <td class="light">♙</td>
-                    <td class="dark">♙</td>
+                    <td class="light" id="a2" @onclick=@(()=> cellPressed("a2"))>♙</td>
+                    <td class="dark" id="b2" @onclick=@(()=> cellPressed("b2"))>♙</td>
+                    <td class="light" id="c2" @onclick=@(()=> cellPressed("c2"))>♙</td>
+                    <td class="dark" id="d2" @onclick=@(()=> cellPressed("d2"))>♙</td>
+                    <td class="light" id="e2" @onclick=@(()=> cellPressed("e2"))>♙</td>
+                    <td class="dark" id="f2" @onclick=@(()=> cellPressed("f2"))>♙</td>
+                    <td class="light" id="g2" @onclick=@(()=> cellPressed("g2"))>♙</td>
+                    <td class="dark" id="h2" @onclick=@(()=> cellPressed("h2"))>♙</td>
                 </tr>
                 <tr>
                     <th>1</th>
-                    <td class="dark">♖</td>
-                    <td class="light">♘</td>
-                    <td class="dark">♗</td>
-                    <td class="light">♕</td>
-                    <td class="dark">♔</td>
-                    <td class="light">♗</td>
-                    <td class="dark">♘</td>
-                    <td class="light">♖</td>
+                    <td class="dark" id="a1" @onclick=@(()=> cellPressed("a1"))>♖</td>
+                    <td class="light" id="b1" @onclick=@(()=> cellPressed("b1"))>♘</td>
+                    <td class="dark" id="c1" @onclick=@(()=> cellPressed("c1"))>♗</td>
+                    <td class="light" id="d1" @onclick=@(()=> cellPressed("d1"))>♕</td>
+                    <td class="dark" id="e1" @onclick=@(()=> cellPressed("e1"))>♔</td>
+                    <td class="light" id="f1" @onclick=@(()=> cellPressed("f1"))>♗</td>
+                    <td class="dark" id="g1" @onclick=@(()=> cellPressed("g1"))>♘</td>
+                    <td class="light" id="h1" @onclick=@(()=> cellPressed("h1"))>♖</td>
                 </tr>
             </tbody>
         </table>
+
+        
         </body>
 
         <style>
@@ -122,6 +124,54 @@
         </style>
 
 
+
 @code {
 
+    string location { get; set; }
+    string figure { get; set; }
+    string selectedFigure { get; set; }
+    string location2 { get; set; }
+    bool isSecondClick = false;
+
+    public async Task<string> cellPressed(string location)
+    {
+        if (!isSecondClick)
+        {
+            string coordinates = location;
+            figureCheckInCell(location);
+            return coordinates;
+            cellChecking();
+            
+            isSecondClick = true;
+            
+        }
+        else
+        {
+            return location2 = location;
+        }
+
+    }
+
+    public async Task<string> figureCheckInCell(string coordinates)
+    {
+
+        var figure = await JsRuntime.InvokeAsync<string>("getValueById", coordinates);
+        return figure;
+    }
+
+    public async Task<string> cellChecking()
+    {
+        if(figure != string.Empty)
+        {
+            
+            return selectedFigure = figure; 
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+
+    
 }
