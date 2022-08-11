@@ -126,45 +126,68 @@
 
 
 @code {
-
-    string location { get; set; }
-    string figure { get; set; }
-    string selectedFigure { get; set; }
-    string location2 { get; set; }
+    string location;
+    string figure;
+    string selectedFigure;
+    string location2;
+    string coordinates;
     bool isSecondClick = false;
 
-    public async Task<string> cellPressed(string location)
+    public async Task cellPressed(string location)
     {
         if (!isSecondClick)
         {
-            string coordinates = location;
-            figureCheckInCell(location);
-            return coordinates;
-            cellChecking();
-            
+            coordinates = location;
+            await figureCheckInCell(location);
+            await cellChecking();
             isSecondClick = true;
-            
+
         }
         else
         {
-            return location2 = location;
+            location2 = location;
+            //cellChecking();
+            isSecondClick = false;
+            await figureDeleteInCell(coordinates);
+            await figureMoveInCell(location2);
+            
         }
-
+        
     }
 
     public async Task<string> figureCheckInCell(string coordinates)
     {
-
-        var figure = await JsRuntime.InvokeAsync<string>("getValueById", coordinates);
+        figure = await JsRuntime.InvokeAsync<string>("getValueById", coordinates);
         return figure;
+    }
+
+    public async Task figureMoveInCell(string coordinates)
+    {
+        await JsRuntime.InvokeAsync<string>("setValueById", coordinates, selectedFigure);
+    }
+
+    public async Task figureDeleteInCell(string coordinates)
+    {
+        await JsRuntime.InvokeAsync<string>("setValueById", coordinates, string.Empty);
     }
 
     public async Task<string> cellChecking()
     {
-        if(figure != string.Empty)
+        if(figure == string.Empty)
         {
-            
-            return selectedFigure = figure; 
+            return string.Empty;
+        }
+        else
+        {
+            return selectedFigure = figure;
+        }
+    }
+
+    public async Task<string> secondClickCellChecking()
+    {
+        if (figure != string.Empty)
+        {
+            return selectedFigure = figure;
         }
         else
         {
