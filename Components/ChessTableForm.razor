@@ -1,4 +1,5 @@
-﻿@inject IJSRuntime JsRuntime
+﻿@using ChessGameApp.Services
+@inject IJSRuntime JsRuntime
 
 
 
@@ -126,39 +127,51 @@
 
 
 @code {
-    string location;
+    public BoardChess board { get; set; } = new BoardChess();
+
+
+
+
     string figure;
     string selectedFigure;
     string location2;
     string coordinates;
     bool isSecondClick = false;
 
+
+    public string Cordinates(){
+        var cord = coordinates;
+        return cord;
+    }
+
     public async Task cellPressed(string location)
     {
         if (!isSecondClick)
         {
+
             coordinates = location;
             await figureCheckInCell(location);
             await cellChecking();
             isSecondClick = true;
 
+            board.SelectedPiece = new SelectedPiece
+                {
+                    Piece = Board.GetPiece(selectedFigure),
+                    Location = Board.GetLocation(coordinates)
+                };
         }
-        else
+        else if (Board.GetLegalMoves(board).Contains(Board.GetLocation(location)))
         {
-            location2 = location;
-            //cellChecking();
-            isSecondClick = false;
-            await figureDeleteInCell(coordinates);
-            await figureMoveInCell(location2);
             
+            await MakeMove(location);
+
         }
-        
     }
 
-    public async Task<string> figureCheckInCell(string coordinates)
+    public async Task figureCheckInCell(string coordinates)
     {
         figure = await JsRuntime.InvokeAsync<string>("getValueById", coordinates);
-        return figure;
+        
     }
 
     public async Task figureMoveInCell(string coordinates)
@@ -170,6 +183,7 @@
     {
         await JsRuntime.InvokeAsync<string>("setValueById", coordinates, string.Empty);
     }
+
 
     public async Task<string> cellChecking()
     {
@@ -183,6 +197,7 @@
         }
     }
 
+
     public async Task<string> secondClickCellChecking()
     {
         if (figure != string.Empty)
@@ -195,6 +210,30 @@
         }
     }
 
+
+    public async Task MakeMove(string location)
+    {
+        location2 = location;
+
+        isSecondClick = false;
+        await figureDeleteInCell(coordinates);
+        await figureMoveInCell(location2);
+
+        var newLocation = Board.GetLocation(location2);
+
+        var newLocationXY = Board.GetXYFromLocation(newLocation);
+
+        board.Pieces[newLocationXY.Item1, newLocationXY.Item2] = board.SelectedPiece.Piece;
+        var oldLocation = Board.GetXYFromLocation(board.SelectedPiece.Location);
+        var X = oldLocation.Item1;
+        var Y = oldLocation.Item2;
+
+        board.Pieces[X, Y] = PieceWithColor.EmptySquare;
+
+        board.WhitesTurn = !board.WhitesTurn;
+
+        board.SelectedPiece = default;
+    }
 
     
 }
