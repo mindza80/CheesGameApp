@@ -139,10 +139,7 @@
     bool isSecondClick = false;
 
 
-    public string Cordinates(){
-        var cord = coordinates;
-        return cord;
-    }
+    
 
     public async Task cellPressed(string location)
     {
@@ -152,13 +149,14 @@
             coordinates = location;
             await figureCheckInCell(location);
             await cellChecking();
-            isSecondClick = true;
+            
 
             board.SelectedPiece = new SelectedPiece
                 {
                     Piece = Board.GetPiece(selectedFigure),
                     Location = Board.GetLocation(coordinates)
                 };
+            isSecondClick = true;
         }
         else if (Board.GetLegalMoves(board).Contains(Board.GetLocation(location)))
         {
@@ -215,16 +213,16 @@
     {
         location2 = location;
 
-        isSecondClick = false;
+        
         await figureDeleteInCell(coordinates);
         await figureMoveInCell(location2);
 
         var newLocation = Board.GetLocation(location2);
 
-        var newLocationXY = Board.GetXYFromLocation(newLocation);
+        var newLocationXY = BoardChess.GetXYFromLocation(newLocation);
 
         board.Pieces[newLocationXY.Item1, newLocationXY.Item2] = board.SelectedPiece.Piece;
-        var oldLocation = Board.GetXYFromLocation(board.SelectedPiece.Location);
+        var oldLocation = BoardChess.GetXYFromLocation(board.SelectedPiece.Location);
         var X = oldLocation.Item1;
         var Y = oldLocation.Item2;
 
@@ -233,6 +231,8 @@
         board.WhitesTurn = !board.WhitesTurn;
 
         board.SelectedPiece = default;
+
+        isSecondClick = false;
     }
 
     
