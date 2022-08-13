@@ -82,17 +82,13 @@ namespace ChessGameApp.Services
             }
             y = int.Parse(location[1].ToString());
 
-            return (BoardLocation)(x + y);
+            return (BoardLocation)(x + (y+1));
 
         } 
 
 
 
-        public static BoardLocation GetLocation(int row, int cell) =>
-            (BoardLocation)((row * 10) + cell + 1);
-
-        public static (int, int) GetXYFromLocation(BoardLocation location) =>
-            ((int)location / 10, ((int)location % 10) - 1);
+        
 
 
         private static BoardLocation[] GetPawnMoves(BoardChess board)
@@ -105,14 +101,14 @@ namespace ChessGameApp.Services
             {
                 //logic to promote                
                 //one move foward
-                if (board.Pieces[x + 1, y] == PieceWithColor.EmptySquare)
+                if (board.Pieces[x + 1 , y ] == PieceWithColor.EmptySquare)
                 {
-                    legalMoves.Add(BoardChess.GetLocation(x + 1, y));
+                    legalMoves.Add(BoardChess.GetLocation(x + 1, y ));
                 }
                 //two moves foward
-                if (x == 1 && board.Pieces[x + 1, y] == PieceWithColor.EmptySquare && board.Pieces[x + 2, y] == PieceWithColor.EmptySquare)
+                if (x == 1 && board.Pieces[x + 1 , y ] == PieceWithColor.EmptySquare && board.Pieces[x + 2, y] == PieceWithColor.EmptySquare)
                 {
-                    legalMoves.Add(BoardChess.GetLocation(x + 2, y));
+                    legalMoves.Add(BoardChess.GetLocation(x + 2 , y  ));
                 }
                 //take
                 //enpasant
@@ -121,14 +117,14 @@ namespace ChessGameApp.Services
             {
                 //logic to promote                
                 //one move foward
-                if (board.Pieces[x - 1, y] == PieceWithColor.EmptySquare)
+                if (board.Pieces[x - 1, y  ] == PieceWithColor.EmptySquare)
                 {
-                    legalMoves.Add(BoardChess.GetLocation(x - 1, y));
+                    legalMoves.Add(BoardChess.GetLocation(x - 1, y ));
                 }
                 //two moves foward
-                if (x == 6 && board.Pieces[x - 1, y] == PieceWithColor.EmptySquare && board.Pieces[x - 2, y] == PieceWithColor.EmptySquare)
+                if (x == 6 && board.Pieces[x - 1, y ] == PieceWithColor.EmptySquare && board.Pieces[x - 2, y ] == PieceWithColor.EmptySquare)
                 {
-                    legalMoves.Add(BoardChess.GetLocation(x - 2, y));
+                    legalMoves.Add(BoardChess.GetLocation(x - 2,  y ));
                 }
                 //take
                 //enpasant
