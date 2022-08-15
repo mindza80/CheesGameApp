@@ -53,36 +53,36 @@ namespace ChessGameApp.Services
             switch (location[0])
             {
                 case 'a':
-                    x = 0;
+                    y = 0;
                     break;
                 case 'b':  
-                    x = 10;
+                    y = 1;
                     break;
                 case 'c':
-                    x = 20;
+                    y = 2;
                     break;
                 case 'd':
-                    x = 30;
+                    y = 3;
                     break;
                 case 'e':
-                    x = 40;
+                    y = 4;
                     break;
                 case 'f':
-                    x = 50;
+                    y = 5;
                     break;
                 case 'g':
-                    x = 60;
+                    y = 6;
                     break;
                 case 'h':
-                    x = 70;
+                    y = 7;
                     break;
                 default: 
-                    x = -1;
+                    y = -1;
                     break;
             }
-            y = int.Parse(location[1].ToString());
+            x = int.Parse(location[1].ToString());
 
-            return (BoardLocation)(x + (y+1));
+            return (BoardLocation)((x*10)-10 + (y+1));
 
         } 
 
@@ -101,14 +101,14 @@ namespace ChessGameApp.Services
             {
                 //logic to promote                
                 //one move foward
-                if (board.Pieces[x + 1 , y ] == PieceWithColor.EmptySquare)
+                if (board.Pieces[x+1, y ] == PieceWithColor.EmptySquare)
                 {
-                    legalMoves.Add(BoardChess.GetLocation(x + 1, y ));
+                    legalMoves.Add(BoardChess.GetLocation(x+1, y ));
                 }
                 //two moves foward
-                if (x == 1 && board.Pieces[x + 1 , y ] == PieceWithColor.EmptySquare && board.Pieces[x + 2, y] == PieceWithColor.EmptySquare)
+                if (x == 1 && board.Pieces[x+1, y ] == PieceWithColor.EmptySquare && board.Pieces[x+2, y] == PieceWithColor.EmptySquare)
                 {
-                    legalMoves.Add(BoardChess.GetLocation(x + 2 , y  ));
+                    legalMoves.Add(BoardChess.GetLocation(x+2, y ));
                 }
                 //take
                 //enpasant
@@ -117,14 +117,14 @@ namespace ChessGameApp.Services
             {
                 //logic to promote                
                 //one move foward
-                if (board.Pieces[x - 1, y  ] == PieceWithColor.EmptySquare)
+                if (board.Pieces[x-1, y] == PieceWithColor.EmptySquare)
                 {
-                    legalMoves.Add(BoardChess.GetLocation(x - 1, y ));
+                    legalMoves.Add(BoardChess.GetLocation(x-1, y));
                 }
                 //two moves foward
-                if (x == 6 && board.Pieces[x - 1, y ] == PieceWithColor.EmptySquare && board.Pieces[x - 2, y ] == PieceWithColor.EmptySquare)
+                if (x == 6 && board.Pieces[x-1, y] == PieceWithColor.EmptySquare && board.Pieces[x-2, y] == PieceWithColor.EmptySquare)
                 {
-                    legalMoves.Add(BoardChess.GetLocation(x - 2,  y ));
+                    legalMoves.Add(BoardChess.GetLocation(x-2, y));
                 }
                 //take
                 //enpasant

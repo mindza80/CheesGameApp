@@ -101,7 +101,8 @@
             (BoardLocation)((row * 10) + cell + 1);
 
         public static (int, int) GetXYFromLocation(BoardLocation location) =>
-            ((int)location / 10, ((int)location % 10) -1);
+            (((int)location / 10), ((int)location % 10)-1);
+        //(((int) location / 10)-1, ((int) location % 10));
     }
     public class SelectedPiece
     {
@@ -110,14 +111,14 @@
     }
     public enum BoardLocation
     {
-        A8 = 08, B8 = 18, C8 = 28, D8 = 38, E8 = 48, F8 = 58, G8 = 68, H8 = 78,
-        A7 = 07, B7 = 17, C7 = 27, D7 = 37, E7 = 47, F7 = 57, G7 = 67, H7 = 77,
-        A6 = 06, B6 = 16, C6 = 26, D6 = 36, E6 = 46, F6 = 56, G6 = 66, H6 = 76,
-        A5 = 05, B5 = 15, C5 = 25, D5 = 35, E5 = 45, F5 = 55, G5 = 65, H5 = 75,
-        A4 = 04, B4 = 14, C4 = 24, D4 = 34, E4 = 44, F4 = 54, G4 = 64, H4 = 74,
-        A3 = 03, B3 = 13, C3 = 23, D3 = 33, E3 = 43, F3 = 53, G3 = 63, H3 = 73,
-        A2 = 02, B2 = 12, C2 = 22, D2 = 32, E2 = 42, F2 = 52, G2 = 62, H2 = 72,
-        A1 = 01, B1 = 11, C1 = 21, D1 = 31, E1 = 41, F1 = 51, G1 = 61, H1 = 71
+        A1 = 01, A2 = 11, A3 = 21, A4 = 31, A5 = 41, A6 = 51, A7 = 61, A8 = 71,
+        B1 = 02, B2 = 12, B3 = 22, B4 = 32, B5 = 42, B6 = 52, B7 = 62, B8 = 72,
+        C1 = 03, C2 = 13, C3 = 23, C4 = 33, C5 = 43, C6 = 53, C7 = 63, C8 = 73,
+        D1 = 04, D2 = 14, D3 = 24, D4 = 34, D5 = 44, D6 = 54, D7 = 64, D8 = 74,
+        E1 = 05, E2 = 15, E3 = 25, E4 = 35, E5 = 45, E6 = 55, E7 = 65, E8 = 75,
+        F1 = 06, F2 = 16, F3 = 26, F4 = 36, F5 = 46, F6 = 56, F7 = 66, F8 = 76,
+        G1 = 07, G2 = 17, G3 = 27, G4 = 37, G5 = 47, G6 = 57, G7 = 67, G8 = 77,
+        H1 = 08, H2 = 18, H3 = 28, H4 = 38, H5 = 48, H6 = 58, H7 = 68, H8 = 78
     }
     public enum PieceWithColor
     {
