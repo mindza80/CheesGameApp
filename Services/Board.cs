@@ -55,7 +55,9 @@ namespace ChessGameApp.Services
                 case 'a':
                     y = 0;
                     break;
+
                 case 'b':
+
                     y = 1;
                     break;
                 case 'c':
@@ -76,11 +78,14 @@ namespace ChessGameApp.Services
                 case 'h':
                     y = 7;
                     break;
+
                 default:
+
                     y = -1;
                     break;
             }
             x = int.Parse(location[1].ToString());
+
 
             return (BoardLocation)((x * 10) - 10 + (y + 1));
 
@@ -100,6 +105,7 @@ namespace ChessGameApp.Services
             if (board.SelectedPiece.Piece == PieceWithColor.WhitePawn)
             {
                 //one move foward
+
                 if (x < 7 && board.Pieces[x + 1, y] == PieceWithColor.EmptySquare)
                 {
                     legalMoves.Add(BoardChess.GetLocation(x + 1, y));
@@ -108,6 +114,7 @@ namespace ChessGameApp.Services
                 if (x == 1 && board.Pieces[x + 1, y] == PieceWithColor.EmptySquare && board.Pieces[x + 2, y] == PieceWithColor.EmptySquare)
                 {
                     legalMoves.Add(BoardChess.GetLocation(x + 2, y));
+
                 }
                 //take right
                 if (x < 7 && y < 7 && board.Pieces[x + 1, y + 1] != PieceWithColor.EmptySquare && board.WhitesTurn != board.Pieces[x + 1, y + 1].PieceIsWhite())
@@ -124,6 +131,7 @@ namespace ChessGameApp.Services
             else
             {
                 //one move foward
+
                 if (x > 0 && board.Pieces[x - 1, y] == PieceWithColor.EmptySquare)
                 {
                     legalMoves.Add(BoardChess.GetLocation(x - 1, y));
@@ -137,6 +145,7 @@ namespace ChessGameApp.Services
                 if (x > 0 && y < 7 && board.Pieces[x - 1, y + 1] != PieceWithColor.EmptySquare && board.WhitesTurn != board.Pieces[x - 1, y + 1].PieceIsWhite())
                 {
                     legalMoves.Add(BoardChess.GetLocation(x - 1, y + 1));
+
                 }
                 //take left
                 if (x > 0 && y > 0 && board.Pieces[x - 1, y - 1] != PieceWithColor.EmptySquare && board.WhitesTurn != board.Pieces[x - 1, y - 1].PieceIsWhite())
