@@ -6,7 +6,9 @@ namespace ChessGameApp.Services
 {
     public class Board
     {
+
         public static bool WhitePawnLastCell = false;
+
 
 
         public static PieceWithColor GetPiece(string piece)
@@ -57,7 +59,9 @@ namespace ChessGameApp.Services
                     y = 0;
                     break;
 
+
                 case 'b':
+
 
                     y = 1;
                     break;
@@ -80,7 +84,9 @@ namespace ChessGameApp.Services
                     y = 7;
                     break;
 
+
                 default:
+
 
                     y = -1;
                     break;
@@ -88,9 +94,11 @@ namespace ChessGameApp.Services
             x = int.Parse(location[1].ToString());
 
 
+
             return (BoardLocation)((x * 10) - 10 + (y + 1));
 
         }
+
 
 
         private static BoardLocation[] GetRookMoves(BoardChess board)
@@ -99,6 +107,7 @@ namespace ChessGameApp.Services
             var loc = BoardChess.GetXYFromLocation(board.SelectedPiece.Location);
             var x = loc.Item1;
             var y = loc.Item2;
+
 
             for (var tx = x + 1; tx <= 7; tx++)
             {
@@ -259,6 +268,7 @@ namespace ChessGameApp.Services
         }
         
 
+
         private static BoardLocation[] GetKnightMoves(BoardChess board)
         {
             var legalMoves = new List<BoardLocation>();
@@ -377,12 +387,15 @@ namespace ChessGameApp.Services
             {
                 //one move foward
 
+
+
                 if (x < 7 && board.Pieces[x + 1, y] == PieceWithColor.EmptySquare)
                 {
                     legalMoves.Add(BoardChess.GetLocation(x + 1, y));
                 }
                 //two moves foward
                 if (x == 1 && board.Pieces[x + 1, y] == PieceWithColor.EmptySquare && board.Pieces[x + 2, y] == PieceWithColor.EmptySquare)
+
                 {
                     legalMoves.Add(BoardChess.GetLocation(x + 2, y));
 
@@ -402,10 +415,13 @@ namespace ChessGameApp.Services
                     WhitePawnLastCell = true;
                 }
 
+
             }
             else
             {
                 //one move foward
+
+
 
                 if (x > 0 && board.Pieces[x - 1, y] == PieceWithColor.EmptySquare)
                 {
@@ -413,6 +429,7 @@ namespace ChessGameApp.Services
                 }
                 //two moves foward
                 if (x == 6 && board.Pieces[x - 1, y] == PieceWithColor.EmptySquare && board.Pieces[x - 2, y] == PieceWithColor.EmptySquare)
+
                 {
                     legalMoves.Add(BoardChess.GetLocation(x - 2, y));
                 }
@@ -421,12 +438,15 @@ namespace ChessGameApp.Services
                 {
                     legalMoves.Add(BoardChess.GetLocation(x - 1, y + 1));
 
+
                 }
                 //take left
                 if (x > 0 && y > 0 && board.Pieces[x - 1, y - 1] != PieceWithColor.EmptySquare && board.WhitesTurn != board.Pieces[x - 1, y - 1].PieceIsWhite())
                 {
                     legalMoves.Add(BoardChess.GetLocation(x - 1, y - 1));
                 }
+
+
 
 
             }
@@ -480,14 +500,18 @@ namespace ChessGameApp.Services
             var cell = location;
             if (cell == string.Empty) return false;
 
+
             return playerIsWhite && PieceIsWhite(figure)
                    || !playerIsWhite && !PieceIsWhite(figure);
+
         }
 
         public bool PieceIsWhite(string figure)
         {
             return figure == "♙" || figure == "♖" || figure == "♘" || figure == "♗" || figure == "♕" || figure == "♔";
         }
+
     }
+
 }
 
