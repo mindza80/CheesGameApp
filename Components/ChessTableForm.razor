@@ -107,7 +107,37 @@
                 </tr>
             </tbody>
         </table>
+    @{
 
+
+
+        if (selectedFigure == "♙" && (location2 == "a8" || location2 == "b8" || location2 == "c8" || location2 == "d8" || location2 == "e8" || location2 == "f8" || location2 == "g8" || location2 == "h8"))
+        {
+                      
+                    <div class="Prom">
+                
+                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Knight"))>♘</button>
+                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Rook"))>♖</button>
+                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Bishop"))>♗</button>
+                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Queen"))>♕</button>
+                
+                    </div>
+            
+        }
+
+        if (selectedFigure == "♟" && (location2 == "a1" || location2 == "b1" || location2 == "c1" || location2 == "d1" || location2 == "e1" || location2 == "f1" || location2 == "g1" || location2 == "h1"))
+        {
+            
+                    <div class="Prom">
+                    <button class="btn" @onclick=@(()=> BlackPawnPromotion("Knight"))>♞</button>
+                    <button class="btn" @onclick=@(()=> BlackPawnPromotion("Rook"))>♜</button>
+                    <button class="btn" @onclick=@(()=> BlackPawnPromotion("Bishop"))>♝</button>
+                    <button class="btn" @onclick=@(()=> BlackPawnPromotion("Queen"))>♛</button>
+                </div>
+           
+        }
+        
+    }
 
         </body>
 
@@ -153,6 +183,7 @@
     public void Deselect()
     {
         selectedFigure = string.Empty;
+        figure = string.Empty;
         coordinates = string.Empty;
         location2 = string.Empty;
         isSecondClick = false;
@@ -170,15 +201,18 @@
             await figureCheckInCell(location);
 
             var orPieceIsWhite = bor.PieceIsWhite(figure);
-
+            await cellChecking();
 
             if(orPieceIsWhite != board.WhitesTurn)
             {
+                Deselect();
                 return;
             }
 
-            await cellChecking();
-
+            if (figure == string.Empty)
+            {
+                return;
+            }
 
             board.SelectedPiece = new SelectedPiece
                     {
@@ -191,6 +225,11 @@
             isSecondClick = true;
 
             Highlights = Board.GetLegalMoves(board);
+
+            if(Highlights.Length == 0){
+                Deselect();
+                return;
+            }
         }
         else if (Highlights.Contains(Board.GetLocation(location)))
         {
@@ -206,6 +245,11 @@
                 return;
             }
         }
+    }
+
+    public async Task PawnPromotion(string choosenFigur)
+    {
+        await JsRuntime.InvokeAsync<string>("setValueById", location2, choosenFigur);
     }
 
     public async Task figureCheckInCell(string coordinates)
@@ -229,6 +273,7 @@
     {
         if (figure == string.Empty)
         {
+
             return string.Empty;
         }
         else
@@ -258,6 +303,8 @@
 
         board.Pieces[X, Y] = PieceWithColor.EmptySquare;
 
+
+
         board.WhitesTurn = !board.WhitesTurn;
 
 
@@ -275,7 +322,66 @@
         isSecondClick = false;
         coordinates = string.Empty;
 
+
+
+    }
+
+    public async Task WhitePawnPromotion(string choosenFigur)
+    {
         
+            switch (choosenFigur)
+            {
+                case "Rook":
+                    await PawnPromotion("♖");
+                    Deselect();
+                    
+                    break;
+                case "Knight":
+                    await PawnPromotion("♘");
+                    Deselect();
+                    break;
+                case "Queen":
+                    await PawnPromotion("♕");
+                    Deselect();
+                    break;
+                case "Bishop":
+                    await PawnPromotion("♗");
+                    Deselect();
+                    break;
+            }
+        
+    }
+
+
+
+    public async Task BlackPawnPromotion(string choosenFigur)
+    {
+        
+            switch (choosenFigur)
+            {
+                case "Rook":
+                    await PawnPromotion("♜");
+                    Deselect();
+                    break;
+                case "Knight":
+                    await PawnPromotion("♞");
+                    Deselect();
+
+                    break;
+                case "Queen":
+                    await PawnPromotion("♛");
+                    Deselect();
+                    break;
+                case "Bishop":
+                    await PawnPromotion("♝");
+                    Deselect();
+                    break;
+                    
+            }
+        
+        
+
+
 
     }
 }
