@@ -103,7 +103,8 @@
             (BoardLocation)((row * 10) + cell + 1);
 
         public static (int, int) GetXYFromLocation(BoardLocation location) =>
-            ((int)location / 10, ((int)location % 10) -1);
+            (((int)location / 10), ((int)location % 10)-1);
+        //(((int) location / 10)-1, ((int) location % 10));
     }
     public class SelectedPiece
     {
