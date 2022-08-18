@@ -1,11 +1,11 @@
-﻿@using ChessGameApp.Services
+@using ChessGameApp.Services
 @inject IJSRuntime JsRuntime
 
 
 
 <body>
     <table class="chess-board">
-            <tbody >
+            <tbody>
                 <tr>
                     <th></th>
                     <th>a</th>
@@ -70,7 +70,9 @@
                     <td class="light @("e4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "e4") ? "highlighted" : string.Empty)" id="e4" @onclick=@(()=> cellPressed("e4"))></td>
                     <td class="dark @("f4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "f4") ? "highlighted" : string.Empty)" id="f4" @onclick=@(()=> cellPressed("f4"))></td>
                     <td class="light @("g4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "g4") ? "highlighted" : string.Empty)" id="g4" @onclick=@(()=> cellPressed("g4"))></td>
-                    <td class="dark@("h4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "h4") ? "highlighted" : string.Empty)" id="h4" @onclick=@(()=> cellPressed("h4"))></td>
+
+                    <td class="dark @("h4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "h4") ? "highlighted" : string.Empty)" id="h4" @onclick=@(()=> cellPressed("h4"))></td>
+
                 </tr>
                 <tr>
                     <th>3</th>
@@ -107,6 +109,31 @@
                 </tr>
             </tbody>
         </table>
+
+
+
+        @{
+
+            if(selectedFigure == "♙" && (location2 == "a8" || location2 == "b8" || location2 == "c8" || location2 == "d8" || location2 == "e8" || location2 == "f8" || location2 == "g8" || location2 == "h8"))
+            {
+                                <div class="Prom">
+                                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Knight"))>♘</button>  
+                                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Rook"))>♖</button> 
+                                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Bishop"))>♗</button> 
+                                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Queen"))>♕</button>
+                                </div>
+            }
+
+            if(selectedFigure == "♟" && (location2 == "a1" || location2 == "b1" || location2 == "c1" || location2 == "d1" || location2 == "e1" || location2 == "f1" || location2 == "g1" || location2 == "h1"))
+            {
+                                <div class="Prom">
+                                        <button class="btn" @onclick=@(()=> BlackPawnPromotion("Knight"))>♞</button>  
+                                        <button class="btn" @onclick=@(()=> BlackPawnPromotion("Rook"))>♜</button> 
+                                        <button class="btn" @onclick=@(()=> BlackPawnPromotion("Bishop"))>♝</button> 
+                                        <button class="btn" @onclick=@(()=> BlackPawnPromotion("Queen"))>♛</button>
+                                </div>
+            }
+        }
 
 
         </body>
@@ -157,6 +184,9 @@
         location2 = string.Empty;
         isSecondClick = false;
         Highlights = new BoardLocation[] { };
+
+        figure = string.Empty;
+
     }
 
 
@@ -177,6 +207,17 @@
                 return;
             }
 
+
+            if(figure == string.Empty)
+            {
+                return;
+            }
+
+
+
+
+
+
             await cellChecking();
 
 
@@ -190,10 +231,23 @@
 
             isSecondClick = true;
 
+
+
             Highlights = Board.GetLegalMoves(board);
+
+            if(Highlights.Length == 0){
+                Deselect();
+                return;
+            }
+
+
         }
         else if (Highlights.Contains(Board.GetLocation(location)))
         {
+
+
+
+
 
             await MakeMove(location);
 
@@ -207,6 +261,12 @@
             }
         }
     }
+
+    public async Task PawnPromotion(string choosenFigur)
+    {
+        await JsRuntime.InvokeAsync<string>("setValueById", location2, choosenFigur);
+    }
+
 
     public async Task figureCheckInCell(string coordinates)
     {
@@ -258,24 +318,90 @@
 
         board.Pieces[X, Y] = PieceWithColor.EmptySquare;
 
+
+        //White Pawn
+        if(selectedFigure == "♙" && X == 7)
+        {
+            //await WhitePawnPromotion(/*choosen figure*/);
+        }
+
+        //Black Pawn
+        if(selectedFigure == "♟" && X == 0)
+        {
+
+        }
+
+
         board.WhitesTurn = !board.WhitesTurn;
 
 
-        board.SelectedPiece = default;
-
-        Highlights = new BoardLocation[] { };
-
-        isSecondClick = false;
-
         board.History.MakeMove(Board.GetLocation(coordinates), newLocation, board.WhitesTurn);
 
-
         //Deselect
+        board.SelectedPiece = default;
         Highlights = new BoardLocation[] { };
         isSecondClick = false;
         coordinates = string.Empty;
 
+    }
+
+
+    public async Task WhitePawnPromotion(string choosenFigur)
+    {
+
+        switch (choosenFigur)
+        {
+            case "Rook":
+                await PawnPromotion("♖");
+                Deselect();
+                break;
+            case "Knight":
+                await PawnPromotion("♘");
+                Deselect();
+                break;
+            case "Queen":
+                await PawnPromotion("♕");
+                Deselect();
+                break;
+            case "Bishop":
+                await PawnPromotion("♗");
+                Deselect();
+                break;
         }
+    }
+
+
+
+    public async Task BlackPawnPromotion(string choosenFigur)
+    {
+        do
+        {
+            switch (choosenFigur)
+            {
+                case "Rook":
+                    await PawnPromotion("♜");
+                    Deselect();
+                    break;
+                case "Knight":
+                    await PawnPromotion("♞");
+                    Deselect();
+
+                    break;
+                case "Queen":
+                    await PawnPromotion("♛");
+                    Deselect();
+                    break;
+                case "Bishop":
+                    await PawnPromotion("♝");
+                    Deselect();
+                    break;
+            }
+        }
+        while (figure != "♟");
+
+    
 
     }
-}
+       }
+   
+
