@@ -9,9 +9,9 @@
         public History History { get; set; }
 
 
+        
 
-
-        public BoardChess()
+    public BoardChess()
         {
             History = new History();
             WhitesTurn = true;
