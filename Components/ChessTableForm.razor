@@ -1,4 +1,4 @@
-﻿@using ChessGameApp.Services
+@using ChessGameApp.Services
 
 @inject IJSRuntime JsRuntime
 @inject NavigationManager navigationManager
@@ -72,7 +72,9 @@
                     <td class="light @("e4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "e4") ? "highlighted" : string.Empty)" id="e4" @onclick=@(()=> cellPressed("e4"))></td>
                     <td class="dark @("f4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "f4") ? "highlighted" : string.Empty)" id="f4" @onclick=@(()=> cellPressed("f4"))></td>
                     <td class="light @("g4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "g4") ? "highlighted" : string.Empty)" id="g4" @onclick=@(()=> cellPressed("g4"))></td>
+
                     <td class="dark @("h4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "h4") ? "highlighted" : string.Empty)" id="h4" @onclick=@(()=> cellPressed("h4"))></td>
+
                 </tr>
                 <tr>
                     <th>3</th>
@@ -268,7 +270,9 @@ display:block}
         location2 = string.Empty;
         isSecondClick = false;
         Highlights = new BoardLocation[] { };
+
         figure = string.Empty;
+
     }
 
 
@@ -394,6 +398,7 @@ display:block}
         board.Pieces[X, Y] = PieceWithColor.EmptySquare;
 
         board.WhitesTurn = !board.WhitesTurn;
+
 
         board.History.MakeMove(Board.GetLocation(coordinates), newLocation, board.WhitesTurn);
 
