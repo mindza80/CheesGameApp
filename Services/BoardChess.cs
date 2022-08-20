@@ -2,15 +2,10 @@
 {
     public class BoardChess
     {
-
         public PieceWithColor[,] Pieces { get; set; }
         public bool WhitesTurn { get; set; }
         public SelectedPiece SelectedPiece { get; set; }
         public History History { get; set; }
-
-
-
-        
 
     public BoardChess()
 
@@ -99,20 +94,18 @@
             PieceWithColor.BlackKnight,
             PieceWithColor.BlackRook
             }
-            };
-        }
-        public static BoardLocation GetLocation(int row, int cell) =>
-            (BoardLocation)((row * 10) + cell + 1);
+        };
+    }
+    public static BoardLocation GetLocation(int row, int cell) =>
+        (BoardLocation)((row * 10) + cell + 1);
 
-        public static (int, int) GetXYFromLocation(BoardLocation location) =>
-            (((int)location / 10), ((int)location % 10)-1);
-        //(((int) location / 10)-1, ((int) location % 10));
+    public static (int, int) GetXYFromLocation(BoardLocation location) =>
+        (((int)location / 10), ((int)location % 10) - 1);
     }
     public class SelectedPiece
     {
         public PieceWithColor Piece { get; init; }
         public BoardLocation Location { get; init; }
-
     }
     public enum BoardLocation
     {
@@ -142,8 +135,6 @@
         BlackKing = 6
     }
 
-
-
     public class History
     {
         public List<Move> Moves { get; set; }
@@ -155,16 +146,12 @@
             Moves.Add(new Move { From = from, To = to, WhitesTurn = whitesTurn });
     }
 
-
-
-
     public struct Move
     {
         public bool WhitesTurn { get; set; }
         public BoardLocation From { get; set; }
         public BoardLocation To { get; set; }
     }
-
 
     public static class Extention
     {
