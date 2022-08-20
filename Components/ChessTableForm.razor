@@ -1,5 +1,7 @@
 @using ChessGameApp.Services
+
 @inject IJSRuntime JsRuntime
+@inject NavigationManager navigationManager
 
 
 
@@ -111,42 +113,59 @@
         </table>
 
 
-
-        @{
-
-            if(selectedFigure == "♙" && (location2 == "a8" || location2 == "b8" || location2 == "c8" || location2 == "d8" || location2 == "e8" || location2 == "f8" || location2 == "g8" || location2 == "h8"))
-            {
-                                <div class="Prom">
-                                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Knight"))>♘</button>  
-                                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Rook"))>♖</button> 
-                                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Bishop"))>♗</button> 
-                                        <button class="btn" @onclick=@(()=> WhitePawnPromotion("Queen"))>♕</button>
-                                </div>
-            }
-
-            if(selectedFigure == "♟" && (location2 == "a1" || location2 == "b1" || location2 == "c1" || location2 == "d1" || location2 == "e1" || location2 == "f1" || location2 == "g1" || location2 == "h1"))
-            {
-                                <div class="Prom">
-                                        <button class="btn" @onclick=@(()=> BlackPawnPromotion("Knight"))>♞</button>  
-                                        <button class="btn" @onclick=@(()=> BlackPawnPromotion("Rook"))>♜</button> 
-                                        <button class="btn" @onclick=@(()=> BlackPawnPromotion("Bishop"))>♝</button> 
-                                        <button class="btn" @onclick=@(()=> BlackPawnPromotion("Queen"))>♛</button>
-                                </div>
-            }
+    @{
+        if (selectedFigure == "♙" && (location2 == "a8" || location2 == "b8" || location2 == "c8" || location2 == "d8" || location2 == "e8" || location2 == "f8" || location2 == "g8" || location2 == "h8"))
+        {
+            
+                isPromotedSelected = true;
+            
+            
+                                                        <div id="myModal" class="modal@((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide"))">
+                                                            <div class="Prom">
+                                                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Knight"))>♘</button>  
+                                                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Rook"))>♖</button> 
+                                                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Bishop"))>♗</button> 
+                                                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Queen"))>♕</button>
+                                                        </div>
+            </div>
         }
 
+        if (selectedFigure == "♟" && (location2 == "a1" || location2 == "b1" || location2 == "c1" || location2 == "d1" || location2 == "e1" || location2 == "f1" || location2 == "g1" || location2 == "h1"))
+        {
+           
+                isPromotedSelected = true;
+            
+
+                                                                            <div id="myModal" class="modal @((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide") ) ">
+                                                            <div class="Prom">
+                                                                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Knight"))>♞</button>  
+                                                                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Rook"))>♜</button> 
+                                                                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Bishop"))>♝</button> 
+                                                                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Queen"))>♛</button>
+                                                            </div>
+                                                            </div>
+        }
+    }
+
+    <div id="myModal" class="modal @(isGameFinish? "show" : "hide")">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <p>@(!board.WhitesTurn ? "White win ♔" : "Black win ♚")</p>
+    <button class="btnNewGame" @onclick=@(()=> NewGame())>New game </button>
+  </div>
+</div>
 
         </body>
 
         <style>
             .chess-board { border-spacing: 0; border-collapse: collapse; }
-            .chess-board th { padding: .5em; }
+            .chess-board th { padding: .6em; }
             .chess-board th + th { border-bottom: 1px solid #000; }
             .chess-board th:first-child,
             .chess-board td:last-child { border-right: 1px solid #000; }
             .chess-board tr:last-child td { border-bottom: 1px solid; }
             .chess-board th:empty { border: none; }
-            .chess-board td { width: 1.5em; height: 1.5em; text-align: center; font-size: 32px; line-height: 0;}
+            .chess-board td { width: 2em; height: 2em; text-align: center; font-size: 45px; line-height: 0;}
             .chess-board .light { background: #eee; }
             .chess-board .dark { background: #aaa; }
             .Selected {
@@ -157,6 +176,65 @@
                 background-color: green !important;
                 border:  1px solid black;
             }
+
+            .modal {
+                
+                 position: fixed; /* Stay in place */
+                 z-index: 1; /* Sit on top */
+                  padding-top: 100px; /* Location of the box */
+                 left: 0;
+                  top: 0;
+                  width: 100%; /* Full width */
+              height: 100%; /* Full height */
+               overflow: auto; /* Enable scroll if needed */
+           background-color: rgb(0,0,0); /* Fallback color */
+             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+             
+}
+
+p{
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.btnNewGame{
+    margin-left: 40%;
+    width: 20%;
+    border-radius: 10px;
+    background-color: skyblue;
+}
+
+.btn{
+    font-size: 10rem;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  margin-top: 15%;
+}
+
+.Prom{
+    background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  margin-top: 15%;
+}
+
+.hide{
+display:none}
+
+
+.show{
+display:block}
+
 
         </style>
 
@@ -172,10 +250,18 @@
     string location2;
     string coordinates;
 
+
     BoardLocation[] Highlights = new BoardLocation[] { };
 
     bool isSecondClick = false;
+    bool isPromotedSelected = false;
+    bool isGameFinish;
 
+
+    public void NewGame()
+    {
+        navigationManager.NavigateTo("/counter", true);
+    }
 
     public void Deselect()
     {
@@ -193,71 +279,61 @@
 
     public async Task cellPressed(string location)
     {
-        if (!isSecondClick)
+        if (isPromotedSelected == false)
         {
-
-            coordinates = location;
-            await figureCheckInCell(location);
-
-            var orPieceIsWhite = bor.PieceIsWhite(figure);
-
-
-            if(orPieceIsWhite != board.WhitesTurn)
+            if (!isSecondClick)
             {
-                return;
-            }
+
+                coordinates = location;
 
 
-            if(figure == string.Empty)
-            {
-                return;
-            }
+                await figureCheckInCell(location);
 
 
+                var orPieceIsWhite = bor.PieceIsWhite(figure);
 
 
+                if (orPieceIsWhite != board.WhitesTurn)
+                {
+                    return;
+                }
 
+                if (figure == string.Empty)
+                {
+                    return;
+                }
 
-            await cellChecking();
+                await cellChecking();
 
-
-            board.SelectedPiece = new SelectedPiece
+                board.SelectedPiece = new SelectedPiece
                     {
                         Piece = Board.GetPiece(selectedFigure),
                         Location = Board.GetLocation(coordinates)
                     };
 
+                isSecondClick = true;
 
+                Highlights = Board.GetLegalMoves(board);
 
-            isSecondClick = true;
+                if (Highlights.Length == 0)
+                {
+                    Deselect();
+                    return;
+                }
 
-
-
-            Highlights = Board.GetLegalMoves(board);
-
-            if(Highlights.Length == 0){
-                Deselect();
-                return;
             }
-
-
-        }
-        else if (Highlights.Contains(Board.GetLocation(location)))
-        {
-
-
-
-
-
-            await MakeMove(location);
-
-        }else
-        {
-            if (coordinates == location)
+            else if (Highlights.Contains(Board.GetLocation(location)))
             {
-                Deselect();
+                await MakeMove(location);
+            }
+            else
+            {
+                if (coordinates == location)
+                {
+                    Deselect();
 
-                return;
+                    return;
+                }
             }
         }
     }
@@ -265,13 +341,14 @@
     public async Task PawnPromotion(string choosenFigur)
     {
         await JsRuntime.InvokeAsync<string>("setValueById", location2, choosenFigur);
+
     }
 
 
     public async Task figureCheckInCell(string coordinates)
     {
-        figure = await JsRuntime.InvokeAsync<string>("getValueById", coordinates);
 
+        figure = await JsRuntime.InvokeAsync<string>("getValueById", coordinates);
     }
 
     public async Task figureMoveInCell(string coordinates)
@@ -302,8 +379,6 @@
     {
         location2 = location;
 
-
-
         await figureDeleteInCell(coordinates);
         await figureMoveInCell(location2);
 
@@ -311,26 +386,16 @@
 
         var newLocationXY = BoardChess.GetXYFromLocation(newLocation);
 
+        var checkmate = board.Pieces[newLocationXY.Item1, newLocationXY.Item2] == PieceWithColor.BlackKing || board.Pieces[newLocationXY.Item1, newLocationXY.Item2] == PieceWithColor.WhiteKing;
+
+
+
         board.Pieces[newLocationXY.Item1, newLocationXY.Item2] = board.SelectedPiece.Piece;
         var oldLocation = BoardChess.GetXYFromLocation(board.SelectedPiece.Location);
         var X = oldLocation.Item1;
         var Y = oldLocation.Item2;
 
         board.Pieces[X, Y] = PieceWithColor.EmptySquare;
-
-
-        //White Pawn
-        if(selectedFigure == "♙" && X == 7)
-        {
-            //await WhitePawnPromotion(/*choosen figure*/);
-        }
-
-        //Black Pawn
-        if(selectedFigure == "♟" && X == 0)
-        {
-
-        }
-
 
         board.WhitesTurn = !board.WhitesTurn;
 
@@ -342,6 +407,23 @@
         Highlights = new BoardLocation[] { };
         isSecondClick = false;
         coordinates = string.Empty;
+
+        if (checkmate)
+        {
+            isPromotedSelected = true;
+            isGameFinish = true;
+            
+
+            if (board.WhitesTurn)
+            {
+                Console.WriteLine("White win");
+            }
+
+            else
+            {
+                Console.WriteLine("Black win");
+            }
+        }
 
     }
 
@@ -368,40 +450,32 @@
                 Deselect();
                 break;
         }
+        isPromotedSelected = false;
     }
-
 
 
     public async Task BlackPawnPromotion(string choosenFigur)
     {
-        do
+        switch (choosenFigur)
         {
-            switch (choosenFigur)
-            {
-                case "Rook":
-                    await PawnPromotion("♜");
-                    Deselect();
-                    break;
-                case "Knight":
-                    await PawnPromotion("♞");
-                    Deselect();
-
-                    break;
-                case "Queen":
-                    await PawnPromotion("♛");
-                    Deselect();
-                    break;
-                case "Bishop":
-                    await PawnPromotion("♝");
-                    Deselect();
-                    break;
-            }
+            case "Rook":
+                await PawnPromotion("♜");
+                Deselect();
+                break;
+            case "Knight":
+                await PawnPromotion("♞");
+                Deselect();
+                break;
+            case "Queen":
+                await PawnPromotion("♛");
+                Deselect();
+                break;
+            case "Bishop":
+                await PawnPromotion("♝");
+                Deselect();
+                break;
         }
-        while (figure != "♟");
-
-    
-
+        
+        isPromotedSelected = false;
     }
-       }
-   
-
+}
