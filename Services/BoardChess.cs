@@ -8,12 +8,7 @@
         public SelectedPiece SelectedPiece { get; set; }
         public History History { get; set; }
 
-
-
-        
-
     public BoardChess()
-
         {
             History = new History();
             WhitesTurn = true;
@@ -106,13 +101,11 @@
 
         public static (int, int) GetXYFromLocation(BoardLocation location) =>
             (((int)location / 10), ((int)location % 10)-1);
-        //(((int) location / 10)-1, ((int) location % 10));
     }
     public class SelectedPiece
     {
         public PieceWithColor Piece { get; init; }
         public BoardLocation Location { get; init; }
-
     }
     public enum BoardLocation
     {
@@ -142,8 +135,6 @@
         BlackKing = 6
     }
 
-
-
     public class History
     {
         public List<Move> Moves { get; set; }
@@ -155,16 +146,12 @@
             Moves.Add(new Move { From = from, To = to, WhitesTurn = whitesTurn });
     }
 
-
-
-
     public struct Move
     {
         public bool WhitesTurn { get; set; }
         public BoardLocation From { get; set; }
         public BoardLocation To { get; set; }
     }
-
 
     public static class Extention
     {

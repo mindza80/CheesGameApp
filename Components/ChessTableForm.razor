@@ -116,34 +116,30 @@
     @{
         if (selectedFigure == "♙" && (location2 == "a8" || location2 == "b8" || location2 == "c8" || location2 == "d8" || location2 == "e8" || location2 == "f8" || location2 == "g8" || location2 == "h8"))
         {
+            isPromotedSelected = true;
             
-                isPromotedSelected = true;
-            
-            
-                                                        <div id="myModal" class="modal@((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide"))">
-                                                            <div class="Prom">
-                                                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Knight"))>♘</button>  
-                                                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Rook"))>♖</button> 
-                                                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Bishop"))>♗</button> 
-                                                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Queen"))>♕</button>
-                                                        </div>
+             <div id="myModal" class="modal @((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide"))">
+               <div class="Prom">
+                <button class="btn" @onclick=@(()=> WhitePawnPromotion("Knight"))>♘</button>  
+                <button class="btn" @onclick=@(()=> WhitePawnPromotion("Rook"))>♖</button> 
+                <button class="btn" @onclick=@(()=> WhitePawnPromotion("Bishop"))>♗</button> 
+                <button class="btn" @onclick=@(()=> WhitePawnPromotion("Queen"))>♕</button>
+               </div>
             </div>
         }
 
         if (selectedFigure == "♟" && (location2 == "a1" || location2 == "b1" || location2 == "c1" || location2 == "d1" || location2 == "e1" || location2 == "f1" || location2 == "g1" || location2 == "h1"))
         {
-           
                 isPromotedSelected = true;
             
-
-                                                                            <div id="myModal" class="modal @((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide") ) ">
-                                                            <div class="Prom">
-                                                                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Knight"))>♞</button>  
-                                                                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Rook"))>♜</button> 
-                                                                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Bishop"))>♝</button> 
-                                                                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Queen"))>♛</button>
-                                                            </div>
-                                                            </div>
+            <div id="myModal" class="modal @((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide"))">
+              <div class="Prom">
+                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Knight"))>♞</button>  
+                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Rook"))>♜</button> 
+                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Bishop"))>♝</button> 
+                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Queen"))>♛</button>
+              </div>
+            </div>
         }
     }
 
@@ -155,59 +151,57 @@
   </div>
 </div>
 
-        </body>
+ </body>
 
-        <style>
-            .chess-board { border-spacing: 0; border-collapse: collapse; }
-            .chess-board th { padding: .6em; }
-            .chess-board th + th { border-bottom: 1px solid #000; }
-            .chess-board th:first-child,
-            .chess-board td:last-child { border-right: 1px solid #000; }
-            .chess-board tr:last-child td { border-bottom: 1px solid; }
-            .chess-board th:empty { border: none; }
-            .chess-board td { width: 2em; height: 2em; text-align: center; font-size: 45px; line-height: 0;}
-            .chess-board .light { background: #eee; }
-            .chess-board .dark { background: #aaa; }
-            .Selected {
-                background-color: red !important;
-                border:  1px solid black;
-            }
-            .highlighted{
-                background-color: green !important;
-                border:  1px solid black;
-            }
+<style>
+ .chess-board { border-spacing: 0; border-collapse: collapse; }
+ .chess-board th { padding: .6em; }
+ .chess-board th + th { border-bottom: 1px solid #000; }
+ .chess-board th:first-child,
+ .chess-board td:last-child { border-right: 1px solid #000; }
+ .chess-board tr:last-child td { border-bottom: 1px solid; }
+ .chess-board th:empty { border: none; }
+ .chess-board td { width: 2em; height: 2em; text-align: center; font-size: 45px; line-height: 0;}
+ .chess-board .light { background: #eee; }
+ .chess-board .dark { background: #aaa; }
+ .Selected {
+            background-color: red !important;
+            border:  1px solid black;
+           }
+ .highlighted{
+              background-color: green !important;
+              border:  1px solid black;
+             }
 
-            .modal {
-                
-                 position: fixed; /* Stay in place */
-                 z-index: 1; /* Sit on top */
-                  padding-top: 100px; /* Location of the box */
-                 left: 0;
-                  top: 0;
-                  width: 100%; /* Full width */
-              height: 100%; /* Full height */
-               overflow: auto; /* Enable scroll if needed */
-           background-color: rgb(0,0,0); /* Fallback color */
-             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-             
-}
+.modal {
+       position: fixed; /* Stay in place */
+       z-index: 1; /* Sit on top */
+       padding-top: 100px; /* Location of the box */
+       left: 0;
+       top: 0;
+       width: 100%; /* Full width */
+       height: 100%; /* Full height */
+       overflow: auto; /* Enable scroll if needed */
+       background-color: rgb(0,0,0); /* Fallback color */
+       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ 
+       }
 
 p{
-    text-align: center;
-    font-size: 4rem;
-    font-weight: bold;
-}
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+ }
 
 .btnNewGame{
-    margin-left: 40%;
-    width: 20%;
-    border-radius: 10px;
-    background-color: skyblue;
-}
+            margin-left: 40%;
+            width: 20%;
+            border-radius: 10px;
+            background-color: skyblue;
+           }
 
 .btn{
     font-size: 10rem;
-}
+    }
 
 /* Modal Content */
 .modal-content {
@@ -220,43 +214,35 @@ p{
 }
 
 .Prom{
-    background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  margin-top: 15%;
-}
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      margin-top: 15%;
+     }
 
-.hide{
-display:none}
-
-
-.show{
-display:block}
+.hide{display:none}
+.show{display:block}
 
 
-        </style>
+ </style>
 
 
 
 @code {
     public BoardChess board { get; set; } = new BoardChess();
     public Board bor { get; set; } = new Board();
-
+    BoardLocation[] Highlights = new BoardLocation[] { };
 
     string figure;
     string selectedFigure;
     string location2;
     string coordinates;
 
-
-    BoardLocation[] Highlights = new BoardLocation[] { };
-
     bool isSecondClick = false;
     bool isPromotedSelected = false;
     bool isGameFinish;
-
 
     public void NewGame()
     {
@@ -270,12 +256,8 @@ display:block}
         location2 = string.Empty;
         isSecondClick = false;
         Highlights = new BoardLocation[] { };
-
         figure = string.Empty;
-
     }
-
-
 
     public async Task cellPressed(string location)
     {
@@ -283,15 +265,11 @@ display:block}
         {
             if (!isSecondClick)
             {
-
                 coordinates = location;
-
 
                 await figureCheckInCell(location);
 
-
                 var orPieceIsWhite = bor.PieceIsWhite(figure);
-
 
                 if (orPieceIsWhite != board.WhitesTurn)
                 {
@@ -320,7 +298,6 @@ display:block}
                     Deselect();
                     return;
                 }
-
             }
             else if (Highlights.Contains(Board.GetLocation(location)))
             {
@@ -331,7 +308,6 @@ display:block}
                 if (coordinates == location)
                 {
                     Deselect();
-
                     return;
                 }
             }
@@ -341,9 +317,7 @@ display:block}
     public async Task PawnPromotion(string choosenFigur)
     {
         await JsRuntime.InvokeAsync<string>("setValueById", location2, choosenFigur);
-
     }
-
 
     public async Task figureCheckInCell(string coordinates)
     {
@@ -361,7 +335,6 @@ display:block}
         await JsRuntime.InvokeAsync<string>("setValueById", coordinates, string.Empty);
     }
 
-
     public async Task<string> cellChecking()
     {
         if (figure == string.Empty)
@@ -373,7 +346,6 @@ display:block}
             return selectedFigure = figure;
         }
     }
-
 
     public async Task MakeMove(string location)
     {
@@ -388,8 +360,6 @@ display:block}
 
         var checkmate = board.Pieces[newLocationXY.Item1, newLocationXY.Item2] == PieceWithColor.BlackKing || board.Pieces[newLocationXY.Item1, newLocationXY.Item2] == PieceWithColor.WhiteKing;
 
-
-
         board.Pieces[newLocationXY.Item1, newLocationXY.Item2] = board.SelectedPiece.Piece;
         var oldLocation = BoardChess.GetXYFromLocation(board.SelectedPiece.Location);
         var X = oldLocation.Item1;
@@ -398,7 +368,6 @@ display:block}
         board.Pieces[X, Y] = PieceWithColor.EmptySquare;
 
         board.WhitesTurn = !board.WhitesTurn;
-
 
         board.History.MakeMove(Board.GetLocation(coordinates), newLocation, board.WhitesTurn);
 
@@ -412,25 +381,11 @@ display:block}
         {
             isPromotedSelected = true;
             isGameFinish = true;
-            
-
-            if (board.WhitesTurn)
-            {
-                Console.WriteLine("White win");
-            }
-
-            else
-            {
-                Console.WriteLine("Black win");
-            }
         }
-
     }
-
 
     public async Task WhitePawnPromotion(string choosenFigur)
     {
-
         switch (choosenFigur)
         {
             case "Rook":
@@ -453,7 +408,6 @@ display:block}
         isPromotedSelected = false;
     }
 
-
     public async Task BlackPawnPromotion(string choosenFigur)
     {
         switch (choosenFigur)
@@ -475,7 +429,6 @@ display:block}
                 Deselect();
                 break;
         }
-        
         isPromotedSelected = false;
     }
 }
