@@ -72,9 +72,7 @@
                     <td class="light @("e4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "e4") ? "highlighted" : string.Empty)" id="e4" @onclick=@(()=> cellPressed("e4"))></td>
                     <td class="dark @("f4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "f4") ? "highlighted" : string.Empty)" id="f4" @onclick=@(()=> cellPressed("f4"))></td>
                     <td class="light @("g4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "g4") ? "highlighted" : string.Empty)" id="g4" @onclick=@(()=> cellPressed("g4"))></td>
-
                     <td class="dark @("h4" == coordinates? "Selected" : string.Empty) @(Highlights.Any( x => x.ToString().ToLower() == "h4") ? "highlighted" : string.Empty)" id="h4" @onclick=@(()=> cellPressed("h4"))></td>
-
                 </tr>
                 <tr>
                     <th>3</th>
@@ -118,28 +116,28 @@
         {
             isPromotedSelected = true;
             
-             <div id="myModal" class="modal @((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide"))">
-               <div class="Prom">
-                <button class="btn" @onclick=@(()=> WhitePawnPromotion("Knight"))>♘</button>  
-                <button class="btn" @onclick=@(()=> WhitePawnPromotion("Rook"))>♖</button> 
-                <button class="btn" @onclick=@(()=> WhitePawnPromotion("Bishop"))>♗</button> 
-                <button class="btn" @onclick=@(()=> WhitePawnPromotion("Queen"))>♕</button>
-               </div>
-            </div>
+                                 <div id="myModal" class="modal @((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide"))">
+                                   <div class="Prom">
+                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Knight"))>♘</button>  
+                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Rook"))>♖</button> 
+                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Bishop"))>♗</button> 
+                                    <button class="btn" @onclick=@(()=> WhitePawnPromotion("Queen"))>♕</button>
+                                   </div>
+                                </div>
         }
 
         if (selectedFigure == "♟" && (location2 == "a1" || location2 == "b1" || location2 == "c1" || location2 == "d1" || location2 == "e1" || location2 == "f1" || location2 == "g1" || location2 == "h1"))
         {
                 isPromotedSelected = true;
             
-            <div id="myModal" class="modal @((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide"))">
-              <div class="Prom">
-                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Knight"))>♞</button>  
-                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Rook"))>♜</button> 
-                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Bishop"))>♝</button> 
-                <button class="btn" @onclick=@(()=> BlackPawnPromotion("Queen"))>♛</button>
-              </div>
-            </div>
+                                <div id="myModal" class="modal @((isPromotedSelected? !isGameFinish? "show" : "hide" : "hide"))">
+                                  <div class="Prom">
+                                    <button class="btn" @onclick=@(()=> BlackPawnPromotion("Knight"))>♞</button>  
+                                    <button class="btn" @onclick=@(()=> BlackPawnPromotion("Rook"))>♜</button> 
+                                    <button class="btn" @onclick=@(()=> BlackPawnPromotion("Bishop"))>♝</button> 
+                                    <button class="btn" @onclick=@(()=> BlackPawnPromotion("Queen"))>♛</button>
+                                  </div>
+                                </div>
         }
     }
 
@@ -161,16 +159,32 @@
  .chess-board td:last-child { border-right: 1px solid #000; }
  .chess-board tr:last-child td { border-bottom: 1px solid; }
  .chess-board th:empty { border: none; }
- .chess-board td { width: 2em; height: 2em; text-align: center; font-size: 45px; line-height: 0;}
- .chess-board .light { background: #eee; }
- .chess-board .dark { background: #aaa; }
+
+        .chess-board td {
+            width: 3rem;
+            height: 3rem;
+            text-align: center;
+            font-size: 45px;
+            line-height: 0;
+            text-shadow: 2px 4px 10px #525252;
+        }
+ .chess-board .light { background: #eee;
+            box-shadow: inset 0.5px 0.5px 5px 1px #c6c6c6;
+        }
+
+        .chess-board .dark {
+            background: #aaa;
+            box-shadow: inset -0.5px -0.5px 5px 1px #6e6e6e;
+        }
  .Selected {
             background-color: red !important;
             border:  1px solid black;
+            text-shadow: 2px 4px 10px #525252;
            }
  .highlighted{
               background-color: green !important;
               border:  1px solid black;
+        text-shadow: 2px 4px 10px #525252;
              }
 
 .modal {
@@ -183,7 +197,7 @@
        height: 100%; /* Full height */
        overflow: auto; /* Enable scroll if needed */
        background-color: rgb(0,0,0); /* Fallback color */
-       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ 
+       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
        }
 
 p{
@@ -223,7 +237,8 @@ p{
      }
 
 .hide{display:none}
-.show{display:block}
+.show{display:block;
+    }
 
 
  </style>
